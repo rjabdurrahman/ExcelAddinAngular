@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
   template
 })
 export default class LoginComponent {
+  status = '';
   app = firebase.initializeApp({
     apiKey: "AIzaSyBpQOjE7MXFMK5nn8T6dvjeG9-8f8ymWW4",
     authDomain: "chatapp-1f75d.firebaseapp.com",
@@ -17,15 +18,18 @@ export default class LoginComponent {
     messagingSenderId: "880223391613",
     appId: "1:880223391613:web:6cc27593b01ac498"
   });
-  title = 'AngularLean';
-  status = '';
   login(email: any, password: any): any {
     this.status = 'Logging...'
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log(res)
         this.status = 'Logged';
-        window.localStorage.setItem('token', 'isToken');
+        firebase
+          .auth()
+          .currentUser.getIdToken(/* forceRefresh */ true)
+          .then(function (idToken) {
+            window.localStorage.setItem('access-token', idToken)
+          })
       })
       .catch(err => {
         this.status = err.message;

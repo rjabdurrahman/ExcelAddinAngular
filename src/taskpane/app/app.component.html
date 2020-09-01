@@ -1,2 +1,2 @@
-<app-login></app-login>
-<app-dashboard></app-dashboard>
+<app-login [hidden] = "logged"></app-login>
+<app-dashboard [hidden] = "!logged"></app-dashboard>

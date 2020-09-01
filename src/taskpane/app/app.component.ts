@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
 const template = require("./app.component.html");
-/* global console Office, Excel, require */
+/* global console, window, Office, Excel, require */
 
 @Component({
   selector: "app-home",
   template
 })
 export default class AppComponent {
+  logged = window.localStorage.getItem('access-token')
   async run() {
     try {
       await Excel.run(async context => {
