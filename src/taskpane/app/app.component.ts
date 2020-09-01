@@ -8,31 +8,6 @@ import * as firebase from 'firebase';
   template
 })
 export default class AppComponent {
-  app = firebase.initializeApp({
-    apiKey: "AIzaSyBpQOjE7MXFMK5nn8T6dvjeG9-8f8ymWW4",
-    authDomain: "chatapp-1f75d.firebaseapp.com",
-    databaseURL: "https://chatapp-1f75d.firebaseio.com",
-    projectId: "chatapp-1f75d",
-    storageBucket: "chatapp-1f75d.appspot.com",
-    messagingSenderId: "880223391613",
-    appId: "1:880223391613:web:6cc27593b01ac498"
-  });
-  title = 'AngularLean';
-  status = '';
-  login(email: any, password: any): any {
-    this.status = 'Logging...'
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log(res)
-        this.status = 'Logged';
-        window.localStorage.setItem('token', 'isToken');
-        this.run();
-      })
-      .catch(err => {
-        this.status = err.message;
-      })
-  }
-
   async run() {
     try {
       await Excel.run(async context => {

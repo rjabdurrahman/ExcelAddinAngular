@@ -1,20 +1,2 @@
-<div id="nonLoggedpage" style="padding: 30px; max-width: 450px; margin: auto;" class="sign-in-from">
-    <h1 class="mb-0">Sign in</h1>
-    <p>Enter your credentials to get access your account.</p>
-    <div autocomplete="off" class="mt-4 ng-untouched ng-pristine ng-invalid">
-        <div class="form-group">
-            <label for="userEmail">Email address</label>
-            <input type="email" placeholder="Enter email" #email class="form-control mb-0 ng-untouched ng-pristine ng-invalid">
-        </div>
-        <div class="form-group form-icon-group"><label for="userPassword">Password</label>
-            <div class="form-icon-control"><input placeholder="Password"
-                    #password class="form-control mb-0 ng-untouched ng-pristine ng-invalid"
-                    type="password"><i class="form-icon cursor-pointer halo-eye-show"></i></div>
-        </div>
-        <div class="d-inline-block w-100">
-            <button class="btn btn-primary float-right" (click) = "login(email.value, password.value)" type="submit">Login</button>
-        </div>
-    </div>
-    <div>{{status}}</div>
-    <app-login></app-login>
-</div>
+<app-login></app-login>
+<h1>App</h1>
