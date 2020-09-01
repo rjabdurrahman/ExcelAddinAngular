@@ -1,0 +1,71 @@
+import { Component } from "@angular/core";
+const template = require("./app.component.html");
+import * as firebase from 'firebase';
+/* global console, window, Office, Excel, require */
+
+@Component({
+  selector: "app-home",
+  template
+})
+export default class AppComponent {
+  app = firebase.initializeApp({
+    apiKey: "AIzaSyBpQOjE7MXFMK5nn8T6dvjeG9-8f8ymWW4",
+    authDomain: "chatapp-1f75d.firebaseapp.com",
+    databaseURL: "https://chatapp-1f75d.firebaseio.com",
+    projectId: "chatapp-1f75d",
+    storageBucket: "chatapp-1f75d.appspot.com",
+    messagingSenderId: "880223391613",
+    appId: "1:880223391613:web:6cc27593b01ac498"
+  });
+  title = 'AngularLean';
+  status = '';
+  login(email: any, password: any): any {
+    this.status = 'Logging...'
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res)
+        this.status = 'Logged';
+        window.localStorage.setItem('token', 'isToken');
+        this.run();
+      })
+      .catch(err => {
+        this.status = err.message;
+      })
+  }
+
+  async run() {
+    try {
+      await Excel.run(async context => {
+        var ws1 = context.workbook.worksheets.getActiveWorksheet()
+        ws1.name = 'Salary'
+        context.workbook.worksheets.add('Employees')
+        var sheet = context.workbook.worksheets.getItem('Employees')
+        var expensesTable = sheet.tables.add('A1:D1', true /*hasHeaders*/)
+        expensesTable.name = 'ExpensesTable'
+
+        expensesTable.getHeaderRowRange().values = [['Date', 'Merchant', 'Category', 'Amount']]
+
+        expensesTable.rows.add(null /*add rows to the end of the table*/, [
+          ['1/1/2017', 'The Phone Company', 'Communications', '$120'],
+          ['1/2/2017', 'Northwind Electric Cars', 'Transportation', '$142'],
+          ['1/5/2017', 'Best For You Organics Company', 'Groceries', '$27'],
+          ['1/10/2017', 'Coho Vineyard', 'Restaurant', '$33'],
+          ['1/11/2017', 'Bellows College', 'Education', '$350'],
+          ['1/15/2017', 'Trey Research', 'Other', '$135'],
+          ['1/15/2017', 'Best For You Organics Company', 'Groceries', '$97']
+        ])
+
+        if (Office.context.requirements.isSetSupported('ExcelApi', '1.2')) {
+          sheet.getUsedRange().format.autofitColumns()
+          sheet.getUsedRange().format.autofitRows()
+        }
+
+        sheet.activate()
+
+        return context.sync()
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
