@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 const template = require("./login.component.html");
 import * as firebase from 'firebase';
-/* global console, window, Office, Excel, require */
+/* global console, window require */
 
 @Component({
   selector: "app-login",

@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 const template = require("./app.component.html");
-import * as firebase from 'firebase';
-/* global console, window, Office, Excel, require */
+/* global console Office, Excel, require */
 
 @Component({
   selector: "app-home",
